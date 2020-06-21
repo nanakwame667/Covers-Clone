@@ -8,6 +8,8 @@ import {Button,Container,Header,Card,CardItem,Left,Text,Content,Accordion,Body} 
 
 import MapView,{Marker,PROVIDER_GOOGLE} from 'react-native-maps';
 
+import getDirections from 'react-native-google-maps-directions';
+
 import Picker from '../components/country';
 
 const dataArray = [
@@ -49,19 +51,54 @@ export default class SettingsScreen extends Component{
         this.setState({phone1:true})
         this.setState({phone:false})
     }
+     handleGetDirections = () => {
+        const data = {
+          
+            destination:{
+                latitude:5.650497398,
+                longitude:-0.185499258
+            },
+            params: [
+                {
+                    key:'travelmode',
+                    value:'driving'
+                },
+                {
+                    key:'dir_action',
+                    value:'navigate'
+                }
+            ],
+            waypoints:[
+                {
+                    latitude:5.650497398,
+                    longitude:-0.185499258
+                },
+                {
+                    latitude:5.650497398,
+                    longitude:-0.185499258
+                },
+                {
+                    latitude:5.650497398,
+                    longitude:-0.185499258
+                }
+            ]
+        }
+
+        getDirections(data)
+    }
     render(){
         const date= new Date().toDateString();
         return(
-            <Container>
+            <Container style={{flex:1}}>
             <View style={{height:50,marginLeft:20}}>
-            <Text style={{fontFamily:'Roboto_medium',fontSize:30}}>Settings</Text>
+            <Text style={{fontFamily:'rale_bold',fontSize:30}}>Settings</Text>
             </View>
             <ScrollView>
 
             {/*Self Assessment Card */}
             <TouchableOpacity 
             onPress={()=>this.setState({show:true})}
-            style={{flexDirection:'row',width:410,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
+            style={{flexDirection:'row',flex:1,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
             <View style={{flex:1,alignSelf:'center',paddingLeft:20}}>
             <Text style={{fontFamily:'rale_bold'}}>Self Assessment</Text>
             <Text style={{fontFamily:'rale_light',fontSize:12,paddingTop:2}}>Ascertain your covid-19 risk using our screening tool</Text>
@@ -73,7 +110,7 @@ export default class SettingsScreen extends Component{
 
             {/*FAQs Card */}
             <TouchableOpacity onPress={()=>this.setState({showFAQs:true})}
-            style={{flexDirection:'row',width:410,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
+            style={{flexDirection:'row',flex:1,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
             <View style={{flex:1,alignSelf:'center',paddingLeft:20}}>
             <Text style={{fontFamily:'rale_bold'}}>FAQs</Text>
             <Text style={{fontFamily:'rale_light',fontSize:12,paddingTop:2}}>Get answers to Frequently Asked Questions</Text>
@@ -85,7 +122,7 @@ export default class SettingsScreen extends Component{
             {/*Testing Centers Card */}
 
             <TouchableOpacity onPress={()=>this.setState({showTesting:true})}
-            style={{flexDirection:'row',width:410,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
+            style={{flexDirection:'row',flex:1,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
             <View style={{flex:1,alignSelf:'center',paddingLeft:20}}>
             <Text style={{fontFamily:'rale_bold'}}>Testing Centers</Text>
             <Text style={{fontFamily:'rale_light',fontSize:12,paddingTop:2}}>View testing centers near you</Text>
@@ -97,7 +134,7 @@ export default class SettingsScreen extends Component{
 
             {/*Personal Details Card */}
             <TouchableOpacity onPress={()=>this.setState({showProfile:true})}
-            style={{flexDirection:'row',width:410,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
+            style={{flexDirection:'row',flex:1,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
             <View style={{flex:1,alignSelf:'center',paddingLeft:20}}>
             <Text style={{fontFamily:'rale_bold'}}>Personal Details</Text>
             <Text style={{fontFamily:'rale_light',fontSize:12,paddingTop:2}}>View and update your personal details</Text>
@@ -109,7 +146,7 @@ export default class SettingsScreen extends Component{
 
             {/*Statistics Card */}
             <TouchableOpacity onPress={()=>this.setState({showStats:true})}
-            style={{flexDirection:'row',width:410,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
+            style={{flexDirection:'row',flex:1,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
             <View style={{flex:1,alignSelf:'center',paddingLeft:20}}>
             <Text style={{fontFamily:'rale_bold'}}>Statistics</Text>
             <Text style={{fontFamily:'rale_light',fontSize:12,paddingTop:2}}>Get the current statistics of the COVID-19</Text>
@@ -120,7 +157,7 @@ export default class SettingsScreen extends Component{
             </TouchableOpacity>
 
             {/*Policy Card */}
-            <TouchableOpacity style={{flexDirection:'row',width:410,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
+            <TouchableOpacity style={{flexDirection:'row',flex:1,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
             <View style={{flex:1,alignSelf:'center',paddingLeft:20}}>
             <Text style={{fontFamily:'rale_bold'}}>Privacy Policy</Text>
             <Text style={{fontFamily:'rale_light',fontSize:12,paddingTop:2}}>View our privacy policy</Text>
@@ -131,7 +168,7 @@ export default class SettingsScreen extends Component{
             </TouchableOpacity>
 
             {/*Share Card */}
-            <TouchableOpacity style={{flexDirection:'row',width:410,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
+            <TouchableOpacity style={{flexDirection:'row',flex:1,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
             <View style={{flex:1,alignSelf:'center',paddingLeft:20}}>
             <Text style={{fontFamily:'rale_bold'}}>Share</Text>
             <Text style={{fontFamily:'rale_light',fontSize:12,paddingTop:2}}>Share this app with friends and family</Text>
@@ -140,7 +177,7 @@ export default class SettingsScreen extends Component{
             <Ionicons name="ios-arrow-forward" size={30} color="black" />
             </View>
             </TouchableOpacity>
-            <TouchableOpacity style={{flexDirection:'row',width:410,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
+            <TouchableOpacity style={{flexDirection:'row',flex:1,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
             <View style={{flex:1,alignSelf:'center',paddingLeft:20}}>
             <Text style={{fontFamily:'rale_bold'}}>Self Assessment</Text>
             <Text style={{fontFamily:'rale_light',fontSize:12,paddingTop:2}}>Ascertain your covid-19 risk using our screening tool</Text>
@@ -153,7 +190,7 @@ export default class SettingsScreen extends Component{
 
             {/*This is the Self Assessment Modal*/}
             <Modal
-            style={{width:420,backgroundColor:'none',margin:0,height:180,justifyContent:'flex-start',paddingTop:10}}
+            style={{flex:1,backgroundColor:'none',margin:0,height:180,justifyContent:'flex-start',paddingTop:10}}
             animationType = {"slide"}
             
             transparent={true}
@@ -192,7 +229,7 @@ export default class SettingsScreen extends Component{
 
           {/*FAQs Modal */}
             <Modal
-            style={{width:420,backgroundColor:'none',margin:0,height:180,justifyContent:'flex-start',paddingTop:10}}
+            style={{flex:1,backgroundColor:'none',margin:0,height:180,justifyContent:'flex-start',paddingTop:10}}
             animationType = {"slide"}
             transparent={true}
             visible={this.state.showFAQs}
@@ -217,15 +254,13 @@ export default class SettingsScreen extends Component{
 
         {/*Testing Centers Modal */}
         <Modal
-        style={{width:420,backgroundColor:'none',margin:0,height:180,justifyContent:'flex-start',paddingTop:10}}
+        style={{flex:1,backgroundColor:'none',margin:0,height:180,justifyContent:'flex-start',paddingTop:10}}
         animationType = {"slide"}
         
         transparent={true}
         visible={this.state.showTesting}
         onRequestClose={() => {
-            Alert.alert('Do you want to close this modal?.');
-            
-            
+            this.setState({showTesting:false})
         }}
         >
         
@@ -244,36 +279,9 @@ export default class SettingsScreen extends Component{
         </View>
         <View style={{marginLeft:10}}>
         <Text style={{paddingLeft:70,fontFamily:'rale_regular',fontSize:14,marginBottom:20}}>{date}</Text>
-        <TouchableOpacity onPress={()=>this.setState({viewMap:true})}>
+        <TouchableOpacity onPress={this.handleGetDirections}>
         <Text style={{paddingLeft:70,fontFamily:'rale_regular',fontSize:14,color:'gold'}}>Get Directions</Text>
         </TouchableOpacity>
-        <Modal visible={this.state.viewMap}
-        onRequestClose={() => {
-            this.setState({viewMap:false})
-        }}
-        transparent={true}
-        >
-                <MapView
-            initialRegion={{
-            latitude: 5.650497398,
-            longitude: -0.185499258,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-            }}
-            style={{height:'100%'}}
-            showsUserLocation={true}
-            provider={PROVIDER_GOOGLE}
-        >
-        <Marker
-        coordinate={{
-            latitude: 5.650497398,
-            longitude: -0.185499258
-        }}
-        title="Ani-fori Medical Institute"
-        description="Covid-19 Testing Center"
-        />
-        </MapView>
-        </Modal>
         </View>
         </View>
                 <View 
@@ -284,36 +292,9 @@ export default class SettingsScreen extends Component{
             </View>
             <View style={{marginLeft:10}}>
             <Text style={{paddingLeft:70,fontFamily:'rale_regular',fontSize:14,marginBottom:20}}>{date}</Text>
-            <TouchableOpacity onPress={()=>this.setState({viewMap:true})}>
+            <TouchableOpacity onPress={this.handleGetDirections}>
             <Text style={{paddingLeft:70,fontFamily:'rale_regular',fontSize:14,color:'gold'}}>Get Directions</Text>
             </TouchableOpacity>
-            <Modal visible={this.state.viewMap}
-            onRequestClose={() => {
-                this.setState({viewMap:false})
-            }}
-            transparent={true}
-            >
-                    <MapView
-                initialRegion={{
-                latitude: 5.650497398,
-                longitude: -0.185499258,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-                }}
-                style={{height:'100%'}}
-                showsUserLocation={true}
-                provider={PROVIDER_GOOGLE}
-            >
-            <Marker
-            coordinate={{
-                latitude: 5.650497398,
-                longitude: -0.185499258
-            }}
-            title="Ani-fori Medical Institute"
-            description="Covid-19 Testing Center"
-            />
-            </MapView>
-            </Modal>
             </View>
             </View>
             <View 
@@ -324,36 +305,9 @@ export default class SettingsScreen extends Component{
         </View>
         <View style={{marginLeft:10}}>
         <Text style={{paddingLeft:70,fontFamily:'rale_regular',fontSize:14,marginBottom:20}}>{date}</Text>
-        <TouchableOpacity onPress={()=>this.setState({viewMap:true})}>
+        <TouchableOpacity onPress={this.handleGetDirections}>
         <Text style={{paddingLeft:70,fontFamily:'rale_regular',fontSize:14,color:'gold'}}>Get Directions</Text>
         </TouchableOpacity>
-        <Modal visible={this.state.viewMap}
-        onRequestClose={() => {
-            this.setState({viewMap:false})
-        }}
-        transparent={true}
-        >
-                <MapView
-            initialRegion={{
-            latitude: 5.650497398,
-            longitude: -0.185499258,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-            }}
-            style={{height:'100%'}}
-            showsUserLocation={true}
-            provider={PROVIDER_GOOGLE}
-        >
-        <Marker
-        coordinate={{
-            latitude: 5.650497398,
-            longitude: -0.185499258
-        }}
-        title="Ani-fori Medical Institute"
-        description="Covid-19 Testing Center"
-        />
-        </MapView>
-        </Modal>
         </View>
         </View>
             <View 
@@ -364,36 +318,9 @@ export default class SettingsScreen extends Component{
             </View>
             <View style={{marginLeft:10}}>
             <Text style={{paddingLeft:70,fontFamily:'rale_regular',fontSize:14,marginBottom:20}}>{date}</Text>
-            <TouchableOpacity onPress={()=>this.setState({viewMap:true})}>
+            <TouchableOpacity onPress={this.handleGetDirections}>
             <Text style={{paddingLeft:70,fontFamily:'rale_regular',fontSize:14,color:'gold'}}>Get Directions</Text>
             </TouchableOpacity>
-            <Modal visible={this.state.viewMap}
-            onRequestClose={() => {
-            this.setState({viewMap:false})
-            }}
-            transparent={true}
-            >
-                <MapView
-            initialRegion={{
-            latitude: 5.650497398,
-            longitude: -0.185499258,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-            }}
-            style={{height:'100%'}}
-            showsUserLocation={true}
-            provider={PROVIDER_GOOGLE}
-            >
-            <Marker
-            coordinate={{
-            latitude: 5.650497398,
-            longitude: -0.185499258
-            }}
-            title="Ani-fori Medical Institute"
-            description="Covid-19 Testing Center"
-            />
-            </MapView>
-            </Modal>
             </View>
             </View>
             <View 
@@ -404,36 +331,9 @@ export default class SettingsScreen extends Component{
         </View>
         <View style={{marginLeft:10}}>
         <Text style={{paddingLeft:70,fontFamily:'rale_regular',fontSize:14,marginBottom:20}}>{date}</Text>
-        <TouchableOpacity onPress={()=>this.setState({viewMap:true})}>
+        <TouchableOpacity onPress={this.handleGetDirections}>
         <Text style={{paddingLeft:70,fontFamily:'rale_regular',fontSize:14,color:'gold'}}>Get Directions</Text>
         </TouchableOpacity>
-        <Modal visible={this.state.viewMap}
-        onRequestClose={() => {
-            this.setState({viewMap:false})
-        }}
-        transparent={true}
-        >
-                <MapView
-            initialRegion={{
-            latitude: 5.650497398,
-            longitude: -0.185499258,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-            }}
-            style={{height:'100%'}}
-            showsUserLocation={true}
-            provider={PROVIDER_GOOGLE}
-        >
-        <Marker
-        coordinate={{
-            latitude: 5.650497398,
-            longitude: -0.185499258
-        }}
-        title="Ani-fori Medical Institute"
-        description="Covid-19 Testing Center"
-        />
-        </MapView>
-        </Modal>
         </View>
         </View>
         </View>
@@ -443,45 +343,45 @@ export default class SettingsScreen extends Component{
 
         {/*Personal Details Modal */}
         <Modal
-            style={{width:420,backgroundColor:'none',margin:0,height:180,justifyContent:'flex-start',paddingTop:10}}
+            style={{flex:1,backgroundColor:'none',margin:0,height:180,justifyContent:'flex-start',paddingTop:10}}
             animationType = {"slide"}
-            transparent={true}
+            transparent={false}
             visible={this.state.showProfile}
             onRequestClose={() => {
-            Alert.alert('Modal has now been closed.');
+            this.setState({showProfile:false})
         }}
         >
         
         <View style={styles.modalView}>
-        <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+        <View style={{flex:0.1,flexDirection:'row',justifyContent:'space-between'}}>
         <Text style={{fontFamily:'rale_bold',fontSize:35}}>Profile</Text>
         <Ionicons name="md-close" size={30} color="black" 
             onPress={()=>this.setState({showProfile:false})}    
         />
         </View>
-        <View style={{marginTop:40}}>
+        <View style={{flex:0.9}}>
         <Text style={{fontFamily:'rale_regular',fontWeight:'bold'}}>Personal Details</Text>
-        <Text style={{fontFamily:'rale_regular',fontSize:12,marginTop:20,marginBottom:10}}>Enter Age</Text>
+        <Text style={{fontFamily:'rale_regular',fontSize:12,padding:10}}>Enter Age</Text>
         <TextInput
             keyboardType='number-pad'
             style={{
                 height:50,
                 borderWidth:StyleSheet.hairlineWidth,
                 borderRadius:4,borderColor:'rgb(220, 220, 220)',
-                justifyContent:'center',marginBottom:15
+                justifyContent:'center'
                 }}
             />
 
-        <View style={{flexDirection:'row',marginBottom:30}}>
+        <View style={{flexDirection:'row',flex:0.3}}>
         <TouchableOpacity onPress={this.onChange}>
         <View style={{flexDirection:'row'}}>
         <Button rounded dark
-            style={{width:27,height:27,justifyContent:'center',marginRight:5}}
+            style={{width:27,height:27,justifyContent:'center',padding:5}}
             light={!Boolean(this.state.phone)}
         >
         <Ionicons name="ios-checkmark" size={34} color="white" />
         </Button>
-        <Text style={{marginRight:30,fontFamily:'rale_regular',fontSize:12,alignSelf:'center'}}>Female</Text>
+        <Text style={{paddingHorizontal:10,fontFamily:'rale_regular',fontSize:12,alignSelf:'center'}}>Female</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity   onPress={this.onChange1}>
@@ -492,18 +392,20 @@ export default class SettingsScreen extends Component{
         >
         <Ionicons name="ios-checkmark" size={34} color="white" />
         </Button>
-        <Text style={{marginLeft:5,fontFamily:'rale_regular',fontSize:12,alignSelf:'center'}}>Male</Text>
+        <Text style={{paddingHorizontal:10,fontFamily:'rale_regular',fontSize:12,alignSelf:'center'}}>Male</Text>
         </View>
         </TouchableOpacity>
         </View>
-        <Text style={{fontFamily:'rale_regular',fontWeight:'bold'}}>Travel History</Text>
+        <View style={{paddingBottom:20}}>
+        <Text style={{fontFamily:'rale_bold'}}>Travel History</Text>
         <Text
         style={{fontFamily:'rale_regular',fontSize:10}}
         >Select the last two countries you visited(If Applicable)</Text>
-        <View style={{flexDirection:'row',marginTop:30,marginHorizontal:2}}>
+        </View>
+        <View style={{flexDirection:'row',padding:10}}>
             <View style={{
                 borderWidth:1.5,
-                width:180,height:120,
+                flex:1,height:120,
                 borderRadius:7,
                 justifyContent:'center',alignItems:'center'
             }}>
@@ -513,7 +415,7 @@ export default class SettingsScreen extends Component{
             <View
             style={{
                 borderWidth:1.5,
-                width:180,height:120,
+                flex:1,height:120,
                 borderRadius:7,marginLeft:10,
                 justifyContent:'center',alignItems:'center'
             }}
@@ -522,11 +424,11 @@ export default class SettingsScreen extends Component{
             </View>
             
         </View>
-        <View style={{marginTop:20}}>
+        <View style={{paddingTop:20}}>
             <Text style={{fontFamily:'rale_regular',fontWeight:'bold'}}>Medical Professional Information</Text>
             <Text style={{fontFamily:'rale_regular',fontSize:10}}>Applicable if you are a health worker</Text>
             </View>
-            <View style={{marginTop:20}}>
+            <View style={{paddingTop:20}}>
             <Text>Health License Number</Text>
             <TextInput
         keyboardType='number-pad'
@@ -534,16 +436,15 @@ export default class SettingsScreen extends Component{
                 height:50,
                 borderWidth:StyleSheet.hairlineWidth,
                 borderRadius:4,borderColor:'rgb(220, 220, 220)',
-                justifyContent:'center',marginBottom:15,
-                marginTop:10
+                justifyContent:'center',flex:1
         }}
         />
             </View>
-        <View style={{justifyContent:'center',marginTop:10}}>
+        <View style={{paddingTop:10}}>
         <Button style={{height:55,justifyContent:'center'}}
         onPress={() => {
             this.setState({showProfile:false}),Alert.alert('Your Profile has been updated')}}
-        dark
+        dark block
         >
         <Text style={{color:'#fff',fontFamily:'rale_bold'}}>Update Profile</Text>
         </Button>
@@ -555,9 +456,9 @@ export default class SettingsScreen extends Component{
 
       {/*Statistics of COVID-19 */}
         <Modal
-        style={{width:420,backgroundColor:'none',margin:0,height:180,justifyContent:'flex-start',paddingTop:10}}
+        style={{flex:1,backgroundColor:'none',margin:0,height:180,justifyContent:'flex-start',paddingTop:10}}
         animationType = {"slide"}
-        transparent={true}
+        transparent={false}
         visible={this.state.showStats}
         onRequestClose={() => {
             this.setState({showStats:false}) 
@@ -650,6 +551,6 @@ const styles=StyleSheet.create({
         backgroundColor: "white",
         borderTopRightRadius: 5,borderTopLeftRadius:5,
         padding:15,
-        height:727
+        height:727,flex:1
       }
 })
