@@ -2,49 +2,28 @@ import { Ionicons } from '@expo/vector-icons';
 
 import React, { Component } from 'react';
 
-import {View,StyleSheet,Text,TouchableOpacity,Alert,TextInput} from 'react-native';
+import {View,StyleSheet,Text,TouchableOpacity,Alert,ScrollView} from 'react-native';
 
-import {Button,Container,Header,Card,CardItem,Left,Content, Right,Body} from 'native-base';
+import {Button,Container,Header,Card,CardItem,Left,Content, Right,Body,Radio} from 'native-base';
 
 import Modal from 'react-native-modal';
 
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
-var radio_props = [
-    {label: 'None', value: 0 },
-    {label: 'Mild', value: 1 },
-    {label:  'Mid', value: 2 },
-    {label: 'Semi', value: 3 },
-    {label: 'High', value: 4 },
-  ];
+
+
 
 export default class VitalsScreen extends Component{
     constructor(props){
         super(props)
         this.state={
-            show:false,
-            phone:false,
-            phone1:true,
-            validity:true,
-            report:true,
-            case:'',
-            case1:''
+            show:false
         }
     }
-    onChange=(value)=>{
-        this.setState({phone:true})
-        this.setState({phone1:false})
-        this.setState({report:value})
-    }
-    onChange1=(value)=>{
-        this.setState({phone1:true})
-        this.setState({phone:false})
-        this.setState({report:value})
-    }
+
     close(show1){
         this.setState({show:show1});
     }
-   
+
     render(){
         return(
             <Container>
@@ -96,30 +75,9 @@ export default class VitalsScreen extends Component{
                 
             />
             </View>
-            <View>
-            <Card >
-            <CardItem header>
-            <Text>Dry Cough</Text>
-            </CardItem>
-            <CardItem>
-            <Body>
-            <RadioForm
-                radio_props={this.state.types}
-                initial={0}
-                formHorizontal={true}
-                labelHorizontal={true}
-                buttonColor={'#2196f3'}
-                animation={true}
-                onPress={(value) => {this.setState({value:value})}}
-/>
-            </Body>
-            </CardItem>
-
-            </Card>
-            </View>
-             <View style={{justifyContent:'center',marginTop:100}}>
-            <Button style={{height:55,justifyContent:'center'}}
-            dark
+            <View style={{flex:1,justifyContent:'flex-end',alignItems:'center'}}>
+            <Button style={{height:55}}
+            dark block
             onPress={
                 ()=>{this.close(!this.state.show),
                     navigate('UpdateReport',{data:this.state.case,data1:this.state.case1}),
