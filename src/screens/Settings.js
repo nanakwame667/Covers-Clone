@@ -2,17 +2,17 @@ import { Ionicons } from '@expo/vector-icons';
 
 import React, { Component } from 'react';
 
-import {View,StyleSheet,ScrollView,TouchableOpacity,Modal,TextInput,Alert} from 'react-native';
+import {View,StyleSheet,ScrollView,TouchableOpacity,Modal,TextInput,Alert,Share} from 'react-native';
 
-import {Button,Container,Header,Card,CardItem,Left,Text,Content,Accordion,Body} from 'native-base';
+import {Button,Container,Header,Card,CardItem,Left,Text,Content,Body} from 'native-base';
 
-import MapView,{Marker,PROVIDER_GOOGLE} from 'react-native-maps';
+import Accordion from 'react-native-collapsible/Accordion';
 
 import getDirections from 'react-native-google-maps-directions';
 
 import Picker from '../components/country';
 
-const dataArray = [
+const SECTIONS = [
     { title: "What is Coronavirus?", content: "Lorem ipsum dolor sit amet" },
     { title: "What are the Symptoms of COVID-19?", content: "Lorem ipsum dolor sit amet" },
     { title: "How does COVID-19 Spread?", content: "Lorem ipsum dolor sit amet" },
@@ -40,8 +40,9 @@ export default class SettingsScreen extends Component{
             phone:false,
             phone1:true,
             validity:true,
-            viewMap:false
+            activeSections:[]
         }
+        this._shareMessage =this._shareMessage.bind(this);
     }
     onChange=(phone)=>{
         this.setState({phone:phone})
@@ -51,6 +52,7 @@ export default class SettingsScreen extends Component{
         this.setState({phone1:true})
         this.setState({phone:false})
     }
+    //Google Map Direction functions//
      handleGetDirections = () => {
         const data = {
           
@@ -86,6 +88,46 @@ export default class SettingsScreen extends Component{
 
         getDirections(data)
     }
+    //*end of map functions *//
+    //FAQs Accordion functions//
+    renderSectionTitle = section => {
+            return (
+            <View style={styles.content}>
+                <Text>{section.content}</Text>
+            </View>
+            );
+        };
+        
+        renderHeader = section => {
+            return (
+            <View style={styles.header}>
+                <Text style={styles.headerText}>{section.title}</Text>
+            </View>
+            );
+        };
+        
+        renderContent = section => {
+            return (
+            <View style={styles.content}>
+                <Text>{section.content}</Text>
+            </View>
+            );
+        };
+        
+            setSections = sections => {
+                this.setState({
+                activeSections: sections.includes(undefined) ? [] : sections,
+                });
+            };
+            //end of FAQs functions//
+            //Share function//
+            _shareMessage(){
+                Share.share({
+                    message:'Hello,Get the COVID-19 Contact Tracing Expo Project at https://play.google.com/store/apps/details?id=com.TwiSDAHymn.twi_hymn'
+                    
+                })
+            }
+            //end of share function//
     render(){
         const date= new Date().toDateString();
         return(
@@ -93,7 +135,7 @@ export default class SettingsScreen extends Component{
             <View style={{height:50,marginLeft:20}}>
             <Text style={{fontFamily:'rale_bold',fontSize:30}}>Settings</Text>
             </View>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
             {/*Self Assessment Card */}
             <TouchableOpacity 
@@ -168,7 +210,8 @@ export default class SettingsScreen extends Component{
             </TouchableOpacity>
 
             {/*Share Card */}
-            <TouchableOpacity style={{flexDirection:'row',flex:1,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
+            <TouchableOpacity onPress={this._shareMessage}
+             style={{flexDirection:'row',flex:1,height:100,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
             <View style={{flex:1,alignSelf:'center',paddingLeft:20}}>
             <Text style={{fontFamily:'rale_bold'}}>Share</Text>
             <Text style={{fontFamily:'rale_light',fontSize:12,paddingTop:2}}>Share this app with friends and family</Text>
@@ -196,8 +239,7 @@ export default class SettingsScreen extends Component{
             transparent={true}
             visible={this.state.show}
             onRequestClose={() => {
-                Alert.alert('Modal has now been closed.');
-                
+                this.setState({show:false})
             }}
             >
             
@@ -234,7 +276,7 @@ export default class SettingsScreen extends Component{
             transparent={true}
             visible={this.state.showFAQs}
             onRequestClose={() => {
-                Alert.alert('Modal has now been closed.');  
+                this.setState({showFAQs:false})
             }}
             >
             <View style={styles.modalView}>
@@ -245,7 +287,17 @@ export default class SettingsScreen extends Component{
             />
             </View>
             <View>
-            <Accordion dataArray={dataArray} />
+            <ScrollView showsVerticalScrollIndicator={false}>
+            <Accordion
+                activeSections={this.state.activeSections}
+                sections={SECTIONS}
+                touchableComponent={TouchableOpacity}
+                renderHeader={this.renderHeader}
+                renderContent={this.renderContent}
+                duration={400}
+                onChange={this.setSections}
+            />
+            </ScrollView>
             </View>
             </View>
         </Modal>
@@ -353,26 +405,27 @@ export default class SettingsScreen extends Component{
         >
         
         <View style={styles.modalView}>
-        <View style={{flex:0.1,flexDirection:'row',justifyContent:'space-between'}}>
+        <View style={{flexDirection:'row',justifyContent:'space-between'}}>
         <Text style={{fontFamily:'rale_bold',fontSize:35}}>Profile</Text>
         <Ionicons name="md-close" size={30} color="black" 
             onPress={()=>this.setState({showProfile:false})}    
         />
         </View>
-        <View style={{flex:0.9}}>
-        <Text style={{fontFamily:'rale_regular',fontWeight:'bold'}}>Personal Details</Text>
-        <Text style={{fontFamily:'rale_regular',fontSize:12,padding:10}}>Enter Age</Text>
-        <TextInput
+        <View style={{flex:1}}>
+        <Text style={{fontFamily:'rale_regular',fontWeight:'bold',paddingTop:10}}>Personal Details</Text>
+        <Text style={{fontFamily:'rale_regular',fontSize:12,paddingTop:10}}>Enter Age</Text>
+            <View style={{paddingTop:10}}>
+            <TextInput
             keyboardType='number-pad'
             style={{
                 height:50,
                 borderWidth:StyleSheet.hairlineWidth,
                 borderRadius:4,borderColor:'rgb(220, 220, 220)',
                 justifyContent:'center'
-                }}
+            }}
             />
-
-        <View style={{flexDirection:'row',flex:0.3}}>
+            </View>
+        <View style={{flexDirection:'row',paddingTop:15}}>
         <TouchableOpacity onPress={this.onChange}>
         <View style={{flexDirection:'row'}}>
         <Button rounded dark
@@ -396,13 +449,13 @@ export default class SettingsScreen extends Component{
         </View>
         </TouchableOpacity>
         </View>
-        <View style={{paddingBottom:20}}>
+        <View style={{paddingTop:20}}>
         <Text style={{fontFamily:'rale_bold'}}>Travel History</Text>
         <Text
         style={{fontFamily:'rale_regular',fontSize:10}}
         >Select the last two countries you visited(If Applicable)</Text>
         </View>
-        <View style={{flexDirection:'row',padding:10}}>
+        <View style={{flexDirection:'row',paddingTop:15}}>
             <View style={{
                 borderWidth:1.5,
                 flex:1,height:120,
@@ -430,25 +483,27 @@ export default class SettingsScreen extends Component{
             </View>
             <View style={{paddingTop:20}}>
             <Text>Health License Number</Text>
-            <TextInput
-        keyboardType='number-pad'
-        style={{
-                height:50,
-                borderWidth:StyleSheet.hairlineWidth,
-                borderRadius:4,borderColor:'rgb(220, 220, 220)',
-                justifyContent:'center',flex:1
-        }}
-        />
             </View>
-        <View style={{paddingTop:10}}>
-        <Button style={{height:55,justifyContent:'center'}}
-        onPress={() => {
-            this.setState({showProfile:false}),Alert.alert('Your Profile has been updated')}}
-        dark block
-        >
-        <Text style={{color:'#fff',fontFamily:'rale_bold'}}>Update Profile</Text>
-        </Button>
-        </View>
+            <View style={{paddingTop:10}}>
+            <TextInput
+            keyboardType='number-pad'
+            style={{
+                    height:50,
+                    borderWidth:StyleSheet.hairlineWidth,
+                    borderRadius:4,borderColor:'rgb(220, 220, 220)',
+                    justifyContent:'center'
+            }}
+            />
+            </View>
+            <View style={{flex:1,justifyContent:'flex-end',alignItems:'center'}}>
+            <Button style={{height:55}}
+            dark block
+            onPress={() => {
+                this.setState({showProfile:false}),Alert.alert('Your Profile has been updated')}}
+            >
+            <Text style={{color:'#fff',fontFamily:'rale_bold'}}>Update Profile</Text>
+            </Button>
+            </View>
             </View>
             </View>
     </Modal>
@@ -470,12 +525,12 @@ export default class SettingsScreen extends Component{
         <Text style={{fontFamily:'rale_bold',fontSize:28}}>Worldwide</Text>
         </View>
         
-        <View>
+        <View style={{paddingTop:20,flex:1}}>
         {/*World Stats Card */}
-            <Card style={{marginTop:30}}>
+            <Card style={{borderRadius:10}}>
             <CardItem header style={{flexDirection:'row'}}>
             <Ionicons name="ios-globe" size={24} color="blue" />
-            <Text style={{marginLeft:5}}>Worldwide Statistics</Text>
+            <Text style={{padding:5}}>Worldwide Statistics</Text>
             </CardItem>
             <CardItem>
             <Body style={{flexDirection:'row',flex:1,paddingBottom:20}}>
@@ -495,18 +550,19 @@ export default class SettingsScreen extends Component{
             </CardItem>
             </Card>
             {/*Country Picker */}
-            <View style={{marginTop:20}}>
+            <View style={{paddingTop:20}}>
             <Text style={{fontFamily:'rale_bold',fontSize:12,paddingLeft:5}}>Select Country:</Text>
-            <Card style={{flexDirection:'row',justifyContent:'space-between',height:45,alignItems:'center'}}>
+            <Card style={{borderRadius:7,flexDirection:'row',justifyContent:'space-between',height:45,alignItems:'center'}}>
             <Picker/>
             <Ionicons name="ios-arrow-down" size={24} color="grey" style={{paddingRight:10}} /> 
             </Card>
             </View>
             {/*Selected Country Stats */}
-            <Card style={{marginTop:5}}>
+            <View style={{paddingTop:10}}>
+            <Card style={{padding:5}}>
             <CardItem header style={{flexDirection:'row'}}>
             <Ionicons name="ios-stats" size={24} color="green" />
-            <Text style={{marginLeft:5}}>Statistics</Text>
+            <Text style={{padding:5}}>Statistics</Text>
             </CardItem>
             <CardItem>
             <Body style={{flexDirection:'row',flex:1,paddingBottom:20}}>
@@ -531,10 +587,11 @@ export default class SettingsScreen extends Component{
             </Body>
             </CardItem>
             </Card>
+            </View>
             {/*end of country stats */}
-            <View style={{flexDirection:'row-reverse'}}>
+            <View style={{flexDirection:'row-reverse',flex:1}}>
             <Text style={{fontFamily:'rale_regular',fontSize:12}}>{date}</Text>
-            <Text style={{fontFamily:'rale_regular',fontSize:12}}>Last Updated:</Text>
+            <Text style={{fontFamily:'rale_bold',fontSize:12}}>Last Updated:</Text>
             </View>
         </View>
         </View>
@@ -552,5 +609,22 @@ const styles=StyleSheet.create({
         borderTopRightRadius: 5,borderTopLeftRadius:5,
         padding:15,
         height:727,flex:1
-      }
+        },
+        header: {
+            padding: 20,
+        },
+        headerText: {
+            fontSize: 16,
+            fontFamily: 'rale_bold',
+            letterSpacing: -0.8,
+        },
+        content: {
+            paddingHorizontal: 20,
+            backgroundColor: '#fff',
+            paddingVertical: 10,
+        },
+        contentText: {
+            fontFamily: 'rale_regular',
+            fontSize: 14,
+        }
 })

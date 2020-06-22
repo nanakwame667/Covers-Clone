@@ -25,6 +25,7 @@ export default class VitalsScreen extends Component{
     }
 
     render(){
+        const {navigate}= this.props.navigation;
         return(
             <Container style={{flex:1}}>
             <View style={{height:50,marginLeft:20}}>
@@ -79,7 +80,7 @@ export default class VitalsScreen extends Component{
             dark block
             onPress={
                 ()=>{this.close(!this.state.show),
-                    navigate('UpdateReport',{data:this.state.case,data1:this.state.case1}),
+                    navigate('UpdateVitals',{data:this.state.case,data1:this.state.case1}),
                 Alert.alert('Your report has been updated successfully')
                 }}
             >

@@ -63,52 +63,51 @@ export default class HeaderLeft extends Component{
                 
             />
             </View>
-                <View style={{flex:0.9}}>
-                <Text style={{fontFamily:'rale_regular',fontWeight:'bold'}}>Personal Details</Text>
-             <Text style={{fontFamily:'rale_regular',fontSize:12,padding:10}}>Enter Age</Text>
-             <View style={{paddingBottom:10}}>
-             <TextInput
-             keyboardType='number-pad'
-             style={{
+            <View style={{flex:1}}>
+            <Text style={{fontFamily:'rale_regular',fontWeight:'bold',paddingTop:10}}>Personal Details</Text>
+            <Text style={{fontFamily:'rale_regular',fontSize:12,paddingTop:10}}>Enter Age</Text>
+                <View style={{paddingTop:10}}>
+                <TextInput
+                keyboardType='number-pad'
+                style={{
                     height:50,
                     borderWidth:StyleSheet.hairlineWidth,
                     borderRadius:4,borderColor:'rgb(220, 220, 220)',
                     justifyContent:'center'
-            }}
-             />
-             </View>
-             <View style={{flexDirection:'row',flex:0.3}}>
-             <TouchableOpacity onPress={this.onChange}>
-             <View style={{flexDirection:'row'}}>
-             <Button rounded dark
-             style={{width:27,height:27,justifyContent:'center',padding:5}}
-             light={!Boolean(this.state.phone)}
-             >
-             <Ionicons name="ios-checkmark" size={34} color="white" />
-             </Button>
-             <Text style={{paddingHorizontal:10,fontFamily:'rale_regular',fontSize:12,alignSelf:'center'}}>Female</Text>
-             </View>
-             </TouchableOpacity>
-             <TouchableOpacity   onPress={this.onChange1}>
-             <View style={{flexDirection:'row'}}>
-             <Button rounded dark
-             style={{width:27,height:27,justifyContent:'center'}}
+                }}
+                />
+                </View>
+            <View style={{flexDirection:'row',paddingTop:15}}>
+            <TouchableOpacity onPress={this.onChange}>
+            <View style={{flexDirection:'row'}}>
+            <Button rounded dark
+                style={{width:27,height:27,justifyContent:'center',padding:5}}
+                light={!Boolean(this.state.phone)}
+            >
+            <Ionicons name="ios-checkmark" size={34} color="white" />
+            </Button>
+            <Text style={{paddingHorizontal:10,fontFamily:'rale_regular',fontSize:12,alignSelf:'center'}}>Female</Text>
+            </View>
+            </TouchableOpacity>
+            <TouchableOpacity   onPress={this.onChange1}>
+            <View style={{flexDirection:'row'}}>
+            <Button rounded dark
+                style={{width:27,height:27,justifyContent:'center'}}
                 light={!Boolean(this.state.phone1)}
-              
-             >
-             <Ionicons name="ios-checkmark" size={34} color="white" />
-             </Button>
-             <Text style={{paddingHorizontal:10,fontFamily:'rale_regular',fontSize:12,alignSelf:'center'}}>Male</Text>
-             </View>
-             </TouchableOpacity>
-             </View>
-             <View style={{paddingBottom:20}}>
-             <Text style={{fontFamily:'rale_bold'}}>Travel History</Text>
-             <Text
-             style={{fontFamily:'rale_regular',fontSize:12}}
-             >Select the last two countries you visited (If Applicable)</Text>
-             </View>
-             <View style={{flexDirection:'row',padding:10}}>
+            >
+            <Ionicons name="ios-checkmark" size={34} color="white" />
+            </Button>
+            <Text style={{paddingHorizontal:10,fontFamily:'rale_regular',fontSize:12,alignSelf:'center'}}>Male</Text>
+            </View>
+            </TouchableOpacity>
+            </View>
+            <View style={{paddingTop:20}}>
+            <Text style={{fontFamily:'rale_bold'}}>Travel History</Text>
+            <Text
+            style={{fontFamily:'rale_regular',fontSize:10}}
+            >Select the last two countries you visited(If Applicable)</Text>
+            </View>
+            <View style={{flexDirection:'row',paddingTop:15}}>
                 <View style={{
                     borderWidth:1.5,
                     flex:1,height:120,
@@ -129,35 +128,34 @@ export default class HeaderLeft extends Component{
                 <Picker/>
                 </View>
                 
-             </View>
-             <View style={{paddingTop:20}}>
-                <Text style={{fontFamily:'rale_bold'}}>Medical Professional Information</Text>
-                <Text style={{fontFamily:'rale_regular',fontSize:12}}>Applicable if you are a health worker</Text>
+            </View>
+            <View style={{paddingTop:20}}>
+                <Text style={{fontFamily:'rale_regular',fontWeight:'bold'}}>Medical Professional Information</Text>
+                <Text style={{fontFamily:'rale_regular',fontSize:10}}>Applicable if you are a health worker</Text>
                 </View>
                 <View style={{paddingTop:20}}>
-                <Text style={{fontFamily:'rale_bold'}}>Health License Number</Text>
+                <Text>Health License Number</Text>
                 </View>
-                <View style={{flexDirection:'row',paddingTop:10}}>
+                <View style={{paddingTop:10}}>
                 <TextInput
-             keyboardType='number-pad'
-             style={{
-                    height:50,
-                    borderWidth:StyleSheet.hairlineWidth,
-                    borderRadius:4,borderColor:'rgb(220, 220, 220)',
-                    justifyContent:'center',
-                    flex:1
-            }}
-             />
+                keyboardType='number-pad'
+                style={{
+                        height:50,
+                        borderWidth:StyleSheet.hairlineWidth,
+                        borderRadius:4,borderColor:'rgb(220, 220, 220)',
+                        justifyContent:'center'
+                }}
+                />
                 </View>
-            <View style={{paddingTop:20}}>
-            <Button style={{height:55,justifyContent:'center'}}
-            onPress={() => {
-                this.close(!this.state.show),Alert.alert('Your Profile has been updated')}}
-            dark block
-            >
-            <Text style={{color:'#fff',fontFamily:'rale_bold'}}>Update Profile</Text>
-            </Button>
-            </View>
+                <View style={{flex:1,justifyContent:'flex-end',alignItems:'center'}}>
+                <Button style={{height:55}}
+                dark block
+                onPress={() => {
+                    this.close(!this.state.show),Alert.alert('Your Profile has been updated')}}
+                >
+                <Text style={{color:'#fff',fontFamily:'rale_bold'}}>Update Profile</Text>
+                </Button>
+                </View>
                   </View>
                   </View>
           </Modal>
