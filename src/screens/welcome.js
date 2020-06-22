@@ -2,31 +2,52 @@ import React,{Component} from 'react';
 
 import {Text,Content,Button} from 'native-base';
 
-import {ImageBackground,View,TextInput} from 'react-native';
+import 
+{
+    ImageBackground,View,TextInput,
+    KeyboardAvoidingView, 
+    TouchableWithoutFeedback,
+    Keyboard,
+    ActivityIndicator,
+    Dimensions,
+    TouchableOpacity,
+    StyleSheet
+} 
+from 'react-native';
 
 export default class WelcomeScreen extends Component{
     constructor(props){
         super(props)
         this.state={
             phone:'',
-            validity:true
+            validity:true,
+            loading:false
         }
     }
-    
-    
+    handleButton=()=> {
+        this.setState({loading:true});
+        setTimeout(() => {
+            this.props.navigation.navigate('Change Phone',{data:this.state.phone})
+          this.setState({loading:false})
+        }, 1000);
+    }
     render(){
+        const{width}=Dimensions.get('window');
+        const {phone}=this.state.phone;
         return(
-            <View style={{flex:1}}>
+            <TouchableWithoutFeedback
+            onPress={() => Keyboard.dismiss()}
+            style={{flex:1}}>
             <ImageBackground source={require('../../assets/images/welcome.png')}
-            style={{flex:1}}
+            style={{flex:1,resizeMode:'cover',alignItems:'center',justifyContent:'center'}}
             >
-            <View style={{
-                paddingTop:150 ,flex:1,
-                marginHorizontal:15
-            }}>
-            <View style={{
-                
-            }}>
+            <KeyboardAvoidingView style={{
+                justifyContent: 'center',
+            alignItems: 'center',
+            paddingHorizontal: 15,
+            }}
+            behavior="padding"
+            >
             <Text style={{
                 color:'#f3f3f3',
                 fontSize: 60
@@ -36,44 +57,85 @@ export default class WelcomeScreen extends Component{
                 color:'#f3f3f3',fontFamily:'rale_bold',
                 fontSize:14,textAlign:'center'
             }}>(COVID-19 EMERGENCY RESPONSE SOLUTION)</Text>
-            </View>
+            
             <View>
             <Text style={{
                 color:'#f3f3f3',
                 fontSize:14,textAlign:'center',fontFamily:'rale_regular'
             }}>Join the effort by well-meaning Africans using technology to slow down and eventually halt the spread of COVID-19</Text>
             </View>
-            <View style={{flexDirection:'row',justifyContent:'center',paddingTop:40,}}>
+            <View style={{flexDirection:'row',paddingTop:40,}}>
             <TextInput keyboardType={'phone-pad'}
-            value={this.state.phone}
-            onChangeText={(value)=>this.setState({phone:value,validity:false})}
+            value={phone}
+            onChangeText={(phone)=>this.setState({phone:phone})}
             style={{
-                flex:1,
                 backgroundColor:'#f3f3f3',
                 borderRadius:5,fontFamily:'rale_regular',
-                fontSize:14,
-                height:50,alignSelf:'center'
+                fontSize:18,
+                height:53,
+                width: width * 0.8,
+                marginVertical: 10,
+                paddingHorizontal: 20,
+                flex:1
             }}
-            placeholder='Phone Number'
             maxLength={10}
             />
+            <Text style={{
+            position: 'absolute',
+            top: 65,
+            left: width * 0.60,
+            fontFamily:'rale_regular',
+            }}>Phone Number</Text>
             </View>
+
             <View style={{flexDirection:'row',paddingTop:15}}>
-            <Button success
-            disabled={!Boolean(this.state.phone)}
-            style={{
-                flex:1,
-                height:50,alignSelf:'center',justifyContent:'center',
-                borderRadius:5
-            }}
-            onPress={()=>{this.props.navigation.navigate('Change Phone',{data:this.state.phone})}}
-            >
-            <Text>Get Started..</Text>
-            </Button>
+            {this.state.phone.length < 10 ? (
+                <View style={styles.initialState}>
+                  <Text style={styles.Text}>Get Started</Text>
+                </View>
+              ) : (
+                <TouchableOpacity onPress={this.handleButton} style={styles.buttonState}>
+                  {this.state.loading ? (
+                    <ActivityIndicator color={'#fff'} />
+                  ) : (
+                    <Text style={styles.Text}>Get Started</Text>
+                  )}
+                </TouchableOpacity>
+              )}
             </View>
-            </View>
+            </KeyboardAvoidingView>
             </ImageBackground>
-            </View>
+            </TouchableWithoutFeedback>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    Text: {
+      color: '#fff',
+      textAlign: 'center',
+      fontWeight: '500',
+      paddingTop: 5,
+    },
+    phone: {
+      position: 'absolute',
+      top: 65,
+      fontWeight: '500',
+    },
+    initialState: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 54,
+      backgroundColor: '#9f9f99',
+      flex:1,
+      borderRadius:5
+    },
+    buttonState: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 54,
+      backgroundColor: '#4cbd7a',
+      flex:1,
+      borderRadius:5
+    },
+  });
