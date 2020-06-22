@@ -4,7 +4,7 @@ import {View,ScrollView,ImageBackground} from 'react-native';
 
 import {Card,CardItem,Text} from 'native-base';
 
-import {DATA} from '../index';
+import {DATA} from '../../index';
 
 
 

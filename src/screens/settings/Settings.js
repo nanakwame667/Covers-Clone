@@ -10,7 +10,7 @@ import Accordion from 'react-native-collapsible/Accordion';
 
 import getDirections from 'react-native-google-maps-directions';
 
-import Picker from '../components/country';
+import Picker from '../../components/country';
 
 const SECTIONS = [
     { title: "What is Coronavirus?", content: "Lorem ipsum dolor sit amet" },

@@ -2,8 +2,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import React,{Component} from 'react';
 
-import VitalsScreen from './../screens/Vitals';
-import updateVitalsScreen from './../screens/updateVitals';
+import VitalsScreen from './../screens/vitals/Vitals';
+import updateVitalsScreen from './../screens/vitals/updateVitals';
 
 const Stack =createStackNavigator();
 

@@ -8,8 +8,8 @@ import { Container } from 'native-base';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import HomeScreen from './../screens/Home';
-import SettingsScreen from './../screens/Settings';
+import HomeScreen from './../screens/auth/Home';
+import SettingsScreen from './../screens/settings/Settings';
 
 import Reports from './reportStack';
 import Vitals from './vitalsStack';
