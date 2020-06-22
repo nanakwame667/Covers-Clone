@@ -20,7 +20,7 @@ export default class HomeScreen extends Component{
             <ScrollView horizontal={true}>
             <Card style={{height:165}} transparent>
             <CardItem cardBody>
-            <ImageBackground source={require('../../assets/images/confirmed.jpg')}
+            <ImageBackground source={require('../../../assets/images/confirmed.jpg')}
             style={{width:280,height:165}} borderRadius={12}
             >
             <View style={{alignItems:'flex-end'}}>
@@ -32,7 +32,7 @@ export default class HomeScreen extends Component{
             </Card>
             <Card style={{height:165}} transparent>
             <CardItem cardBody >
-            <ImageBackground source={require('../../assets/images/recovered.jpg')}
+            <ImageBackground source={require('../../../assets/images/recovered.jpg')}
             style={{width:280,height:165}} borderRadius={12}
             >
             <View style={{alignItems:'flex-end'}}>
@@ -44,7 +44,7 @@ export default class HomeScreen extends Component{
             </Card>
             <Card style={{height:165}}transparent>
             <CardItem cardBody>
-            <ImageBackground source={require('../../assets/images/death.jpg')}
+            <ImageBackground source={require('../../../assets/images/death.jpg')}
             style={{width:280,height:165}} borderRadius={12}
             >
             <View style={{alignItems:'flex-end'}}>

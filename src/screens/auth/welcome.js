@@ -38,7 +38,7 @@ export default class WelcomeScreen extends Component{
             <TouchableWithoutFeedback
             onPress={() => Keyboard.dismiss()}
             style={{flex:1}}>
-            <ImageBackground source={require('../../assets/images/welcome.png')}
+            <ImageBackground source={require('../../../assets/images/welcome.png')}
             style={{flex:1,resizeMode:'cover',alignItems:'center',justifyContent:'center'}}
             >
             <KeyboardAvoidingView style={{

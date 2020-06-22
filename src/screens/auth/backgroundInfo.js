@@ -152,7 +152,7 @@ enforce our Terms of Use and/or comply with legal requirements.`
                     textAlign: 'center',
                     fontWeight: '500',
                     paddingTop: 5,
-                }}>Submit Code</Text>
+                }}>Let's get started...</Text>
               )}
             </TouchableOpacity>
             </View>

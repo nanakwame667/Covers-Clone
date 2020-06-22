@@ -28,65 +28,7 @@ export default class updateVitalsScreen extends Component{
             <View style={{padding:20}}>
             <Text style={{fontFamily:'rale_bold',fontSize:30}}>Vitals</Text>
             </View>
-            <View style={{height:250,borderTopWidth:0.5,borderBottomWidth:0.5,borderColor:'#D3D3D3'}}>
-            <View style={{flex:1,paddingTop:20,paddingHorizontal:60}}>
-            <View>
-            <Text style={{fontFamily:'rale_bold'}}>{date}</Text>
-            </View>
-            {/*the first row */}
-            <View style={{flex:1}}>
-            <View style={{flex:1,flexDirection:'row'}}>
-            <View style={{flex:0.6,backgroundColor:'#00FA9A',height:90,borderRadius:5,margin:5}}>
-            <View style={{justifyContent:'center',alignItems:'center',paddingTop:10}}>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>Aches</Text>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>0</Text>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>None</Text>
-            </View>
-            </View>
-            <View style={{flex:0.6,backgroundColor:'#FF0000',height:90,borderRadius:5,margin:5}}>
-            <View style={{justifyContent:'center',alignItems:'center',paddingTop:10}}>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>Aches</Text>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>0</Text>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>None</Text>
-            </View>
-            </View>
-            <View style={{flex:0.6,backgroundColor:'#87CEFA',height:90,borderRadius:5,margin:5}}>
-            <View style={{justifyContent:'center',alignItems:'center',paddingTop:10}}>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>Aches</Text>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>0</Text>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>None</Text>
-            </View>
-            </View>
-            </View>
-            {/*end of first row */}
-            {/*Second row */}
-            <View style={{flex:1,flexDirection:'row'}}>
-            <View style={{flex:0.6,backgroundColor:'#87CEFA',height:90,borderRadius:5,margin:5}}>
-            <View style={{justifyContent:'center',alignItems:'center',paddingTop:10}}>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>Aches</Text>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>0</Text>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>None</Text>
-            </View>
-            </View>
-            <View style={{flex:0.6,backgroundColor:'#FF8C00',height:90,borderRadius:5,margin:5}}>
-            <View style={{justifyContent:'center',alignItems:'center',paddingTop:10}}>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>Aches</Text>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>0</Text>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>None</Text>
-            </View>
-            </View>
-            <View style={{flex:0.6,backgroundColor:'#EE82EE',height:90,borderRadius:5,margin:5}}>
-            <View style={{justifyContent:'center',alignItems:'center',paddingTop:10}}>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>Aches</Text>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>0</Text>
-            <Text style={{fontFamily:'rale_bold',color:'#fff'}}>None</Text>
-            </View>
-            </View>
-            </View>
-            {/*end of second row */}
-            </View>
-            </View>
-            </View>
+            
             <ActionButton buttonColor="#000"
             onPress={()=>this.setState({show:true})}
             />
